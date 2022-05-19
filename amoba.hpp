@@ -18,7 +18,7 @@ public:
 	}
 	std::string tamadas(int x,int y)
 	{
-		if(jatekter[x][y]!=1)return "foglalt";
+		if(jatekter[x][y]!=0)return "foglalt";
 		jatekter[x][y]=jatekos;
 		jatekos*=-1;
 		if(jatek_vege())return std::to_string(jatekos)+"_gyozott";
@@ -49,6 +49,10 @@ public:
 					}
 				}
 		return false;
+	}
+	std::vector<std::vector<int>> get_jatekter()
+	{
+		return jatekter;
 	}
 };
 
