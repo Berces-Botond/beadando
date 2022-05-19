@@ -1,4 +1,5 @@
 #include<vector>
+#include<string>
 
 class amoba
 {
@@ -12,16 +13,38 @@ public:
 		jatekter=std::vector<std::vector<int>>(XX,std::vector<int>(YY,0));
 		jatekos=1;
 	}
-	bool tamadas(int x,int y)
+	std::string tamadas(int x,int y)
 	{
-		if(jatekter[x][y]!=1)return true;
+		if(jatekter[x][y]!=1)return "foglalt";
 		jatekter[x][y]=jatekos;
 		jatekos*=-1;
-		if(jatek_vege())return false;
-		return true;
+		if(jatek_vege())return std::to_string(jatekos)+"_gyozott";
+		return "szabalyos_lepes";
 	}
 	bool jatek_vege()
 	{
+		int hossz=0;
+		for(size_t i=0;i<jatekter.size();i++)
+			for(size_t j=0;j<jatekter[i].size();j++)
+				if(jatekter[i][j]==jatekos)
+				{
+					hossz++;
+					int x=i;
+					int y=j;
+					std::vector<int>v{-1,0,1,1};
+					std::vector<int>w{1,1,1,0};
+					for(int n=0;n<4;n++)
+					{
+						int a=v[n];int b=w[n];
+						while( x<XX && y<YY && jatekter[x][y]==jatekos && hossz<5 )
+						{
+							x+=a;
+							y+=b;
+							hossz++;
+						}
+						if(hossz==5)return true;
+					}
+				}
 		return false;
 	}
 };
