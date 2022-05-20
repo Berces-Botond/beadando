@@ -26,6 +26,7 @@ protected:
 	int XX,YY;
 	std::vector<std::vector<int>>jatekter;
 	float fx,fy;
+	std::string uzenet;
 public:
 	grafikusamoba(int x,int y):XX(x),YY(y),fx((float)xx/XX),fy((float)yy/YY)
 	{
@@ -37,8 +38,22 @@ public:
 		while(gin >> ev && ev.keycode!=key_escape)
 		{
 			palyarajz();
-			if(ev.button==btn_left)
-				std::cout<<a->tamadas(ev.pos_x/(int)fx,ev.pos_y/(int)fy)<<std::endl;
+			if(ev.button==btn_left && uzenet!="1_gyozott" && uzenet!="-1_gyozott" && uzenet!="betelt")
+				uzenet=a->tamadas(ev.pos_x/(int)fx,ev.pos_y/(int)fy);
+			if(uzenet=="1_gyozott")
+				gout<<move_to(0,gout.cascent())<<color(255,0,0)<<text("X gyozott\nnyomj entert az uj jatekhoz");
+			if(uzenet=="-1_gyozott")
+				gout<<move_to(0,gout.cascent())<<color(0,0,255)<<text("O gyozott\nnyomj entert az uj jatekhoz");
+			if(uzenet=="betelt")
+				gout<<move_to(0,gout.cascent())<<color(0,255,0)<<text("betelt\nnyomj entert az uj jatekhoz");
+			if(ev.keycode==key_enter&&(uzenet=="-1_gyozott"||uzenet=="1_gyozott"||uzenet=="betelt"))
+			{
+				a=0;
+				delete a;
+				a=new amoba(XX,YY);
+		//		a->reset();
+				uzenet="";
+			}
 			gout<<refresh;
 		}
 	}
@@ -65,7 +80,7 @@ int main()
 {
 	gout.open(xx,yy);
 	gin.timer(1);
-	grafikusamoba gra(15,15);
+	grafikusamoba gra(3,3);
 	gra.loop();
 	return 0;
 }

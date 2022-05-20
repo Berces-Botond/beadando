@@ -22,6 +22,7 @@ public:
 		jatekter[x][y]=jatekos;
 		jatekos*=-1;
 		if(jatek_vege())return std::to_string(-jatekos)+"_gyozott";
+		if(betelt())return "betelt";
 		return "szabalyos_lepes";
 	}
 	bool jatek_vege()
@@ -43,13 +44,28 @@ public:
 							x+=a;
 							y+=b;
 							hossz++;
-							std::cout<<hossz<<std::endl;
+//							std::cout<<hossz<<std::endl;
 						}while( x<XX && y<YY && x>=0 && jatekter[x][y]==-jatekos && hossz<5 );
 						if(hossz==5)return true;
 						hossz=0;
 					}
 				}
 		return false;
+	}
+	bool betelt()
+	{
+		for(size_t i=0;i<jatekter.size();i++)
+			for(size_t j=0;j<jatekter[i].size();j++)
+				if(jatekter[i][j]==0)
+					return false;
+		return true;
+	}
+	void reset()
+	{
+		for(size_t i=0;i<jatekter.size();i++)
+			for(size_t j=0;j<jatekter[i].size();j++)
+				jatekter[i][j]=0;
+		jatekos=1;
 	}
 	std::vector<std::vector<int>> get_jatekter()
 	{
