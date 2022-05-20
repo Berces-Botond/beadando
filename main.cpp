@@ -47,10 +47,7 @@ public:
 				gout<<move_to(0,gout.cascent())<<color(0,255,0)<<text("betelt\nnyomj entert az uj jatekhoz");
 			if(ev.keycode==key_enter&&(uzenet=="-1_gyozott"||uzenet=="1_gyozott"||uzenet=="betelt"))
 			{
-				a=0;
-				delete a;
-				a=new amoba(XX,YY);
-		//		a->reset();
+				a->reset();
 				uzenet="";
 			}
 			gout<<refresh;
