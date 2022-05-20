@@ -1,6 +1,5 @@
 #include"graphics.hpp"
 #include"amoba.hpp"
-#include<iostream>
 #include<cmath>
 using namespace genv;
 
@@ -80,7 +79,7 @@ int main()
 {
 	gout.open(xx,yy);
 	gin.timer(1);
-	grafikusamoba gra(3,3);
+	grafikusamoba gra(15,15);
 	gra.loop();
 	return 0;
 }
