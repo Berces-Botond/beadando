@@ -3,7 +3,7 @@
 
 #include<vector>
 #include<string>
-
+#include<iostream>
 class amoba
 {
 protected:
@@ -21,7 +21,7 @@ public:
 		if(jatekter[x][y]!=0)return "foglalt";
 		jatekter[x][y]=jatekos;
 		jatekos*=-1;
-		if(jatek_vege())return std::to_string(jatekos)+"_gyozott";
+		if(jatek_vege())return std::to_string(-jatekos)+"_gyozott";
 		return "szabalyos_lepes";
 	}
 	bool jatek_vege()
@@ -29,23 +29,24 @@ public:
 		int hossz=0;
 		for(size_t i=0;i<jatekter.size();i++)
 			for(size_t j=0;j<jatekter[i].size();j++)
-				if(jatekter[i][j]==jatekos)
+				if(jatekter[i][j]==-jatekos)
 				{
-					hossz++;
-					int x=i;
-					int y=j;
+//					hossz++;
 					std::vector<int>v{-1,0,1,1};
 					std::vector<int>w{1,1,1,0};
 					for(int n=0;n<4;n++)
 					{
+						int x=i;
+						int y=j;
 						int a=v[n];int b=w[n];
-						while( x<XX && y<YY && x>=0 && jatekter[x][y]==jatekos && hossz<5 )
-						{
+						do{
 							x+=a;
 							y+=b;
 							hossz++;
-						}
+							std::cout<<hossz<<std::endl;
+						}while( x<XX && y<YY && x>=0 && jatekter[x][y]==-jatekos && hossz<5 );
 						if(hossz==5)return true;
+						hossz=0;
 					}
 				}
 		return false;

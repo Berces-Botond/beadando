@@ -1,5 +1,6 @@
 #include"graphics.hpp"
 #include"amoba.hpp"
+#include<iostream>
 #include<cmath>
 using namespace genv;
 
@@ -24,8 +25,9 @@ protected:
 	amoba* a;
 	int XX,YY;
 	std::vector<std::vector<int>>jatekter;
+	float fx,fy;
 public:
-	grafikusamoba(int x,int y):XX(x),YY(y)
+	grafikusamoba(int x,int y):XX(x),YY(y),fx((float)xx/XX),fy((float)yy/YY)
 	{
 		a=new amoba(XX,YY);
 	}
@@ -36,17 +38,15 @@ public:
 		{
 			palyarajz();
 			if(ev.button==btn_left)
-				a->tamadas(0,0);
+				std::cout<<a->tamadas(ev.pos_x/(int)fx,ev.pos_y/(int)fy)<<std::endl;
 			gout<<refresh;
 		}
 	}
 	void palyarajz()
 	{
 		gout<<move_to(0,0)<<color(255,255,255)<<box(xx,yy);
-		float fx=(float)xx/XX;
 		for(int x=0;x<XX;x++)
 			gout<<move_to(x*fx,0)<<color(0,0,0)<<line(0,yy);
-		float fy=(float)yy/YY;
 		for(int y=0;y<YY;y++)
 			gout<<move_to(0,y*fy)<<color(0,0,0)<<line(xx,0);
 		jatekter=a->get_jatekter();
