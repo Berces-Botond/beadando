@@ -3,7 +3,7 @@
 
 #include<vector>
 #include<string>
-#include<iostream>
+
 class amoba
 {
 protected:
@@ -32,19 +32,19 @@ public:
 			for(size_t j=0;j<jatekter[i].size();j++)
 				if(jatekter[i][j]==-jatekos)
 				{
-//					hossz++;
-					std::vector<int>v{-1,0,1,1};
-					std::vector<int>w{1,1,1,0};
+					std::vector<int>v{-1,0,1,1};	//elég a 8 irányból csak 4-et tesztelni, mivel tudjuk, hogy a bal felső sarokból indulunk,
+					std::vector<int>w{1,1,1,0};	//azokat az irányokat érdemes nézni, amiket ez a négy számpár leír (x szerinti és y szerinti elmozdulás)
 					for(int n=0;n<4;n++)
 					{
 						int x=i;
 						int y=j;
-						int a=v[n];int b=w[n];
-						do{
+						int a=v[n];
+						int b=w[n];
+						do
+						{
 							x+=a;
 							y+=b;
 							hossz++;
-//							std::cout<<hossz<<std::endl;
 						}while( x<XX && y<YY && x>=0 && jatekter[x][y]==-jatekos && hossz<5 );
 						if(hossz==5)return true;
 						hossz=0;
