@@ -75,7 +75,6 @@ public:
 int main()
 {
 	gout.open(xx,yy);
-	gin.timer(1);
 	grafikusamoba gra(15,15);
 	gra.loop();
 	return 0;
